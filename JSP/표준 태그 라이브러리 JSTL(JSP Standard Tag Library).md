@@ -1,0 +1,53 @@
+## 표준 태그 라이브러리 JSTL(JSP Standard Tag Library)
+
+
+
+### 사전 설정
+
+- https://search.maven.org/search?q=g:jstl 에서 jstl-1.2.jar 파일 다운로드
+- WEB-INF/lib 에 복사
+- tomcat 6.x 이상 / JSP 2.1 이상
+
+
+
+### 태그 종류
+
+1. ##### 코어 (prefix = "c") 
+
+   - 변수 지원, 흐름제어, URL 처리
+   - http://java.sun.com/jsp/jstl/core
+   - <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+2. ##### XML (prefix = "x")
+
+   - XML코어, 흐름제어, XML변환
+   - http://java.sun.com/jsp/jstl/xml
+   - 
+
+3. ##### 국제화 (prefix = "fmt")
+
+   - 지역, 메세지 형식, 숫자 및 날짜 형식
+   - http://java.sun.com/jsp/jstl/fmt
+
+4. ##### 데이터베이스 (prefix = "sql")
+
+   - SQL
+   - http://java.sun.com/jsp/jstl/sql
+
+5. ##### 함수 (prefix = "fn")
+
+   - 컬렉션 처리, String 처리
+   - http://java.sun.com/jsp/jstl/funtions
+
+
+
+### 사전 지식
+
+- ##### EL ( Expression Language)
+
+  : JSP 객체의 출력을 단순화 하는 용도
+
+  참고 URL :  https://ojava.tistory.com/21 
+
+
+
