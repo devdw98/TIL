@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.dw.mapper.BoardMapper">
+	
+	<select id="getList" resultType="com.dw.domain.BoardVO">
+	<![CDATA[
+	select * from tbl_board where bno > 0
+	]]>
+	</select>
+	
+	<!-- insert 후 pk 값 몰라도 되는 경우 -->
+	<insert id="insert">
+		insert into tbl_board (bno, title, content, writer) values (sql_board.nextval, #{title}, #{content}, #{writer})
+	</insert>
+	
+	<!-- insert 후 pk 값 알아야 하는 경우 -->
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="bno" order="BEFORE" resultType="long">  <!-- BEFORE : pk값 미리 처리 -->
+			select sql_board.nextval from dual
+		</selectKey>
+		
+		insert into tbl_board (bno, title, content, writer) values (#{bno}, #{title}, #{content}, #{writer})  
+		<!-- #{bno}: 이미 처리해서 sql 문에서는 따로 처리 안함 -->
+	</insert>
+	
+	<select id="read" resultType="com.dw.domain.BoardVO">
+	select * from tbl_board where bno = #{bno}
+	</select>
+	
+	<delete id="delete">
+	delete from tbl_board where bno= #{bno}
+	</delete>
+	
+	<update id="update">
+	update tbl_board set title=#{title}, content=#{content}, writer=#{writer}, updateDate=SYSDATE where bno = #{bno}
+	<!-- regdate는 최초 등록 시간이므로 수정 시 건들이지 않음. #{title}같은 건 getTitle()같은 메서드로 받아옴 -->
+	</update>
+	
+	</mapper>
