@@ -35,7 +35,7 @@ public class BoardController {
 	public String register(BoardVO board, RedirectAttributes rttr) {
 		log.info("register"+board);
 		service.register(board);
-		rttr.addFlashAttribute("result", board.getBno());
+		rttr.addFlashAttribute("result", board.getBno()); //일회성으로만 데이터를 전달하여 도배를 막을 수 있음
 		return "redirect:/board/list"; //spring mvc가 내부적으로 response.sendRedirect() 처리를 해줌
 	}
 	
