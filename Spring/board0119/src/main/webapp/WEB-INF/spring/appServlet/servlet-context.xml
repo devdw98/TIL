@@ -16,8 +16,9 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> <!-- 스프링 MVC 설정에서의 화면설정 -->
+		<beans:property name="prefix" value="/WEB-INF/views/" /> 
+		<!-- WEB-INF는 브라우저에서 직접 접근할 수 없는 경로이므로 반드시 controller를 이용하는 모델 2 방식을 사용해야함 -->
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
