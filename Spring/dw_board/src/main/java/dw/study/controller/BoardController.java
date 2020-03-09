@@ -26,11 +26,16 @@ public class BoardController {
 		model.addAttribute("list", service.getList());
 	}
 	
+	@GetMapping("/register")
+	public void register() {
+		
+	}
+	
 	@PostMapping("/register")
 	public String register(BoardVO board, RedirectAttributes rttr) { //µî·Ï
 		System.out.println("register");
 		service.register(board);
-		rttr.addAttribute("result", board.getBno());
+		rttr.addFlashAttribute("result", board.getBno());
 		return "redirect:/board/list";
 	}
 	

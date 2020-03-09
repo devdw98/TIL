@@ -9,7 +9,7 @@ public class BoardVO { //1. data 包府
 	private String content;
 	private String writer;
 	private Date regdate;
-	private Date updateDate;
+	private Date updatedate;
 	
 	public int getBno() {
 		return Bno;
@@ -41,10 +41,10 @@ public class BoardVO { //1. data 包府
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-	public Date getUpdateDate() {
-		return updateDate;
+	public Date getUpdatedate() {
+		return updatedate;
 	}
 	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
+		this.updatedate = updateDate;
 	}
 }
