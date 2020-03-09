@@ -9,6 +9,6 @@ public interface BoardService {
 	public void register(BoardVO board);
 	public BoardVO get(int bno);
 	public boolean update(BoardVO board);
-	public boolean delete(int bno);
+	public boolean remove(int bno);
 	public List<BoardVO> getList();
 }

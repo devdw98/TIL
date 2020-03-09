@@ -10,9 +10,12 @@ import dw.study.mapper.BoardMapper;
 
 @Service //비즈니스 영역을 담당하는 객체임을 표시하기위해 사용함
 public class BoardServiceImpl implements BoardService{
-
 	@Autowired
 	private BoardMapper mapper;
+	
+	public BoardServiceImpl(BoardMapper mapper) {
+		this.mapper = mapper;
+	}
 	
 	@Override
 	public void register(BoardVO board){
@@ -28,7 +31,7 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.update(board) == 1;
 	}
 	@Override
-	public boolean delete(int bno){
+	public boolean remove(int bno){
 		return mapper.delete(bno) ==1;
 	}
 	@Override
