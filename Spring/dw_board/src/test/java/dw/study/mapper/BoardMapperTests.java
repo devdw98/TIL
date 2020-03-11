@@ -1,5 +1,7 @@
 package dw.study.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import dw.study.domain.BoardVO;
+import dw.study.domain.Criteria;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -17,6 +20,16 @@ public class BoardMapperTests {
 	private BoardMapper mapper;
 	
 	@Test
+	public void testPaging() {
+		Criteria cri = new Criteria();
+		cri.setPageNum(3);
+		cri.setAmount(10);
+		System.out.println(cri.getResult());
+		
+		List<BoardVO> list = mapper.getListWithPaging(cri);
+		System.out.println(list);
+	}
+	
 	public void testUpdate() {
 		int bno = 5;
 		String title = "새로운 타이틀";

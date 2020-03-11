@@ -2,9 +2,8 @@ package dw.study.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Select;
-
 import dw.study.domain.BoardVO;
+import dw.study.domain.Criteria;
 
 public interface BoardMapper { //2. SQL 작업해 줄 Mapper Interface 작성
 	
@@ -14,5 +13,7 @@ public interface BoardMapper { //2. SQL 작업해 줄 Mapper Interface 작성
 	public BoardVO read(int bno);
 	public int delete(int bno);
 	public int update(BoardVO board);
+	
+	public List<BoardVO> getListWithPaging(Criteria cri);
 
 }

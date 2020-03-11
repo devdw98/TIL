@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dw.study.domain.BoardVO;
+import dw.study.domain.Criteria;
 import dw.study.service.BoardService;
 
 @Controller //bean으로 인식할 수 있게 함
@@ -21,9 +22,13 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list")
-	public void list(Model model) {
-		System.out.println("list");
-		model.addAttribute("list", service.getList());
+//	public void list(Model model) {
+//		System.out.println("list");
+//		model.addAttribute("list", service.getList());
+//	}
+	public void list(Criteria cri, Model model) {
+		System.out.println("list paging");
+		model.addAttribute("list", service.getList(cri));
 	}
 	
 	@GetMapping("/register")

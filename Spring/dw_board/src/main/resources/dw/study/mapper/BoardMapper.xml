@@ -28,4 +28,12 @@ select * from tbl_board where bno > 0
 	writer=#{writer} where bno=#{bno}
 	</update>
 
+<select id="getListWithPaging" resultType="dw.study.domain.BoardVO">
+<![CDATA[
+select @rownum:=@rownum+1 as rn, tbl_board.* from tbl_board /*!USE INDEX(PRIMARY)*/,
+(select @rownum:=0)R order by bno DESC limit #{result}, #{amount}
+]]>
+
+</select>
+
 </mapper>
