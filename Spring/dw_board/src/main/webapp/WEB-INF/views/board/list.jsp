@@ -12,7 +12,9 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
-		<h6 class="m-0 font-weight-bold text-primary">Board List Page</h6>
+	<div class="panel-heading">Board List Page
+	<button id='regBtn' type="button" class="btn btn-xs pull-right">Register New Board</button></div>
+	<!-- 	<h6 class="m-0 font-weight-bold text-primary">Board List Page</h6>-->
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
@@ -39,10 +41,27 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			
+
 			<!-- Modal -->
-			
-			
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModelLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+						</div>
+						<div class="modal-body">처리 완료</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+							<button type="button" class="btn btn-primary">save
+								changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </div>
@@ -50,6 +69,22 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		var result = '<c:out value="${result}"/>'; //생성된 게시글의 번호
+		
+		checkModal(result);
+		
+		function checkModal(result){
+			if(result===''){
+				return
+			}
+			if(parseInt(result)>0){
+				$(".modal-body").html("게시글 "+parseInt(result)+" 번이 등록되었습니다.");
+			}
+			$("#myModal").modal("show");
+		}
+		
+		$("#regBtn").on("click",function(){
+			self.location="/board/register";
+		});
 	});
 </script>
 
