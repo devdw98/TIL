@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width:200px;
+            height:200px;
+            background-color: skyblue;
+            margin: 0px auto; /*가운데 정렬: 상하 0px, 좌우는 auto*/
+            position:relative;
+        }
+        .one{
+            width:200px;
+            height:200px;
+            background-color: red;
+            position:absolute; /*기준점*/
+            top:10px;
+            left:10px;
+        }
+        .two{
+            width:200px;
+            height:200px;
+            background-color:blue;
+            position:absolute;
+            top:20px;
+            left:20px;
+        }
+        .three{
+            width:200px;
+            height:200px;
+            background-color: green;
+            position:absolute;
+            top:30px;
+            left:30px;
+        }
+        /*absolute의 기준점을 설정하는 것은 부모의 relative*/
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="one"></div>
+    <div class="two"></div>
+    <div class="three"></div>
+    </div>
+    <div class="container">
+        <div class="one"></div>
+    <div class="two"></div>
+    <div class="three"></div>
+    </div>
+
+</body>
+</html>

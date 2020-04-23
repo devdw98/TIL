@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, tr, td, th{
+            /* css 주석 */
+            border: solid 1px black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<!--html주석-->
+
+<body>
+    <table>
+        <tr>
+            <td>순번</td>
+            <td>책이름</td>
+            <td>가격</td>
+            <td>판매량</td>
+            <td>판매액</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>notion</td>
+            <td>7000</td>
+            <td rowspan="2">1000(세로로합침)</td>
+            <td>7,000,000</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>notion</td>
+            <td>7000</td>
+            
+            <td>7,000,000</td>
+        </tr>
+        <tr>
+            
+            <td colspan="4">총액(가로로합침)</td>
+            <td>14,000,000</td>
+        </tr>
+    </table>
+    <br>
+    th를 쓰면 중앙정렬 됨
+    <table>
+        <thead>
+        <tr>
+            <th>순번</th>
+            <th>책이름</th>
+            <th>가격</th>
+            <th>판매량</th>
+            <th>판매액</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>notion</td>
+            <td>7000</td>
+            <td rowspan="2">1000(세로로합침)</td>
+            <td>7,000,000</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>notion</td>
+            <td>7000</td>
+            
+            <td>7,000,000</td>
+        </tr>
+    </tbody>
+        <tr>
+        <tfoot>
+            <td colspan="4">총액(가로로합침)</td>
+            <td>14,000,000</td>
+        </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
