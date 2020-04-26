@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="hello" class="myspring.di.xml.Hello">
+		<!-- property:setName과 매핑 -->
+		<property name="name" value="String" />
+		<property name="printer" ref="printer" /> <!-- 의존관계 설정 -->
+
+	</bean>
+
+	<bean id="printer" class="myspring.di.xml.StringPrinter" />
+	<bean id="consolePrinter" class="myspring.di.xml.ConsolePrinter" />
+
+</beans>
