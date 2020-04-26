@@ -5,7 +5,7 @@
 
 	<bean id="hello" class="myspring.di.xml.Hello">
 		<!-- property:setName과 매핑 -->
-		<property name="name" value="String" />
+		<property name="name" value="Spring" />
 		<property name="printer" ref="printer" /> <!-- 의존관계 설정 -->
 
 	</bean>
