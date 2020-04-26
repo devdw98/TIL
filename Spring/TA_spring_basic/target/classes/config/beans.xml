@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<!-- properties 파일 설정 -->
+	<context:property-placeholder
+		location="classpath:config/value.properties" />
+
+	<!-- Constructor Injection 실습 -->
+	<bean id="hello2" class="myspring.di.xml.Hello">
+		<constructor-arg index="0" value="${myname}" />
+		<constructor-arg index="1" ref="${myprinter}"/>
+		<property name="names">
+		<list>
+			<value>${value1}</value>
+			<value>${value2}</value>
+			<value>${value3}</value>
+		</list>
+		</property>
+		<!-- 생성자 constructor injection -->
+		<!-- <constructor-arg index="0" value="Spring" /> <constructor-arg index="1" 
+			ref="printer" /> <property name="names"> <list> <value>AOP</value> <value>Spring</value> 
+			<value>DI</value> </list> </property> -->
+
+	</bean>
+
 
 	<bean id="hello" class="myspring.di.xml.Hello">
-		<!-- property:setName과 매핑 -->
+		<!-- property:setName(String msg) 과 매핑 -->
 		<property name="name" value="Spring" />
+		<!-- setPrinter(Printer printer) -->
 		<property name="printer" ref="printer" /> <!-- 의존관계 설정 -->
 
 	</bean>
