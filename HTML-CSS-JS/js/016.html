@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        p{
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+<h1 id="one">hello world</h1>
+<p>hello p</p>
+<button onclick="ex()"> push! </button>
+<script>
+    function ex(){
+        //js에서 html 바꾸기
+        document.getElementById('one').innerHTML = '반갑습니다!'; 
+        //js에서 css 바꾸기
+        document.getElementById('one').style.backgroundColor = 'red';
+    }
+</script>    
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="one">hello world</h1>
+    <p>hello p</p>
+    <button id = "two" onclick="ex1()"> push! </button>
+
+    <!-- jQuery 사용하기 위한 jQuery cdn -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+<script>
+    //jQuery는 
+    //1. element를 선택할 수 있는 강력한 방법
+    //2. 선택된 element를 효율적으로 제어할 수 있는 방법
+
+    function ex1(){
+        //js에서 html 바꾸기
+        // document.getElementById('one').innerHTML = '반갑습니다!'; 
+        $('#one').html('반가워요!');
+        //id가져오기.innerHtml대신 씀
+        //js에서 css 바꾸기
+        document.getElementById('one').style.backgroundColor = 'red';
+    }
+    $('#two').click(
+        function ex(){
+            $('p').html('반가워요2');
+        }
+    )
+
+</script>    
+</body>
+</html>

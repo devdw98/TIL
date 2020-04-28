@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //변수의 scope
+        /*
+        var : function scope 가짐, function 에서 실행 안됨
+        let : block scope 가짐 -> block 밖으로 빠져나오면 효력 X
+        const : block scope 가짐, 상수 정의 시 사용
+        */
+        var i = 10;
+        let k = 1000;
+        if(i > 5){
+            var j = 100;
+        }else{
+            var j = 50;
+        }
+        document.write(j);
+
+        if(i > 5){
+            let j = 100;
+        }else{
+            let j = 50;
+        }
+        document.write(j);
+
+    </script>
+</body>
+</html>
