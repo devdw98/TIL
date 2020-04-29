@@ -5,10 +5,10 @@
 	<meta charset="utf-8"> <!--인코딩 방식 설정 -->
 	<meta name="author" content="dowonpark">
 	<meta name="description" content="myhtml">
-	<link rel="stylesheet" type="text/css" href="">
+	<link rel="stylesheet" type="text/css" href="./style.css">
 	<style>
 		h3{
-			color: skyblue;
+			color: brown;
 		}
 	</style>
 </head>
@@ -41,7 +41,7 @@
 	<br>
 	<div class="fruits">
 		<h3>좋아하는 과일</h3>
-		<ul> <!--Unordered List -->
+		<ul class = "five"> <!--Unordered List -->
 			<li>사과</li>
 			<li>딸기</li>
 			<li>복숭아</li>
@@ -52,7 +52,7 @@
 	<br>
 	<div class="language">
 		<h3>컴퓨터 언어</h3>
-		<ol>
+		<ol class="five">
 			<li>C</li>
 			<li>C++</li>
 			<li>java</li>
@@ -82,15 +82,86 @@
 	<br>
 	<div class="myLink">
 		<a href="https://github.com/devdw98">
-			<img src="github.png" width= "50" height="50">
+			<img class="link" src="github.png" width= "50" height="50">
 		</a>
 		<a href="https://youtube.com">
-			<img src="youtube.png" width ="50" height="50">
+			<img class="link" src="youtube.png" width ="50" height="50">
 		</a>
 		<a href="https://facebook.com">
-			<img src="facebook.png" width="50" height="50">
+			<img class="link" src="facebook.png" width="50" height="50">
 		</a>
 	</div>
+	
 </div>
+<div class="inputService" align="center">
+	<h1 >사용자 입력 페이지</h1>
+	<div class="myInput">
+		<div class="textInput">
+			휴대폰 번호를 입력하세요 
+			<input type="text">
+		</div>
+		<br>
+		<div class="textAreaInput">
+			지원동기 입력하세요 <br>
+			<textarea></textarea>
+		</div>
+		<br>
+		<div class="checkbox">
+			사용가능한 프로그래밍 언어 체크<br>
+			C <input type="checkbox">
+			C++ <input type="checkbox">
+			JAVA <input type="checkbox">
+			Python <input type="checkbox">
+		</div>
+		<br>
+		<div class="select">
+			생일 달 입력
+			<select>
+				<option>1월</option>
+				<option>2월</option>
+				<option>3월</option>
+				<option>4월</option>
+				<option>5월</option>
+				<option>6월</option>
+				<option>7월</option>
+				<option>8월</option>
+				<option>9월</option>
+				<option>10월</option>
+				<option>11월</option>
+				<option>12월</option>
+			</select>
+		</div>
+		<br>
+		<button>submit</button>
+	</div>
+	<form class="loginForm">
+		<h4>로그인</h4>
+		<input type="email" placeholder="email"> <br>
+		<input type="password" placeholder="password"><br>
+		<button>로그인</button>
+		<button>회원가입</button>
+	</form>
+</div>
+<div class="Avengers" align="center">
+	<h3>타노스 건틀렛 핑거스냅</h3>
+	<img id=thanos src="thanos.png" width="200" height="200">
+	<br>
+	<img id=ironman src="ironman.png" width="200" height="300">
+	<img id=hulk src="hulk.png" width="200" height="300">
+	<img id=groot src="https://images-na.ssl-images-amazon.com/images/I/612xu%2BUStNL._AC_SY879_.jpg" width="200" height="300">
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+<script src="./index.js">
+	// $(document).ready(function(){
+	// 	$("#thanos").click(function(){
+	// 		$("#ironman").fadeToggle();
+	// 		$("#hulk").fadeToggle("slow");
+	// 		$("#groot").fadeToggle(3000);
+	// 	});
+	// });
+</script>
+
+
 </body>
 </html>
