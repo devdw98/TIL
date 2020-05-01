@@ -17,7 +17,7 @@ import myspring.di.xml.Hello;
 import myspring.di.xml.Printer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:config/beans.xml")
+@ContextConfiguration(locations = {"classpath:config/beans.xml"})
 public class HelloBeanJunitSpringTest {
 	@Autowired
 	ApplicationContext context;
@@ -41,7 +41,7 @@ public class HelloBeanJunitSpringTest {
 		//Spring Container는 해당되는 Bean 객체를 싱글톤으로 관리한다
 	}
 
-	@Test
+	@Test 
 	public void test1() {
 		// 2.Hello Bean 가져오기
 		Hello hello = (Hello) context.getBean("hello2");
@@ -50,7 +50,7 @@ public class HelloBeanJunitSpringTest {
 		
 		assertEquals(3,hello.getNames().size());
 		List<String> list = hello.getNames();
-		for(String value:list) {
+		for(String value: list) {
 			System.out.println(value);
 		}
 		

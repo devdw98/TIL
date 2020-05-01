@@ -5,9 +5,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<!-- component scan 설정 -->
-	<context:component-scan
-		base-package="myspring.user" />
 
 	<!-- properties 파일 설정 -->
 	<context:property-placeholder
@@ -46,12 +43,12 @@
 	<!-- JDBC DataSource 설정 -->
 <!-- 	<context:property-placeholder
 		location="classpath:config/jdbc.properties" /> -->
-	<bean id="dataSource"
+<!-- 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="${db.driverClass}" />
 		<property name="url" value="${db.url}" />
 		<property name="username" value="${db.username}" />
 		<property name="password" value="${db.password}" />
-	</bean>
+	</bean> -->
 
 </beans>

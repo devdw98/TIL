@@ -18,16 +18,18 @@ import myspring.user.service.UserService;
 import myspring.user.vo.UserVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:config/beans.xml")
+@ContextConfiguration(locations = "classpath:config/data.xml")
 public class UserClientTest { // JDBC 연결 테스트
+	
 	@Autowired
-	ApplicationContext context;
+	private ApplicationContext context;
 
-	@Test
+	@Test 
 	public void dataSourceTest() {
 		DataSource ds = (DataSource) context.getBean("dataSource");
 
 		try {
+			System.out.println();
 			System.out.println(ds.getConnection());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -37,7 +39,7 @@ public class UserClientTest { // JDBC 연결 테스트
 	@Autowired
 	UserService service;
 	
-	@Test
+	@Test @Ignore
 	public void getUserTest() {
 		UserVO user = service.getUser("gd");
 		System.out.println(user);
