@@ -18,13 +18,14 @@ import myspring.user.service.UserService;
 import myspring.user.vo.UserVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:config/data.xml")
+@ContextConfiguration(locations = { "classpath:config/data.xml", "classpath:config/aop.xml" })
 public class UserClientTest { // JDBC 연결 테스트
-	
+
 	@Autowired
 	private ApplicationContext context;
 
-	@Test 
+	@Test
+	@Ignore
 	public void dataSourceTest() {
 		DataSource ds = (DataSource) context.getBean("dataSource");
 
@@ -35,36 +36,39 @@ public class UserClientTest { // JDBC 연결 테스트
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Autowired
 	UserService service;
-	
-	@Test @Ignore
+
+	@Test
 	public void getUserTest() {
 		UserVO user = service.getUser("gd");
 		System.out.println(user);
 		assertEquals("홍길동", user.getName());
 	}
-	
-	@Test @Ignore
+
+	@Test
+	@Ignore
 	public void insertUserTest() {
-		service.insertUser(new UserVO("dl","둘리","M","Anyang"));
-		for(UserVO user : service.getUserList()) {
+		service.insertUser(new UserVO("dl", "둘리", "M", "Anyang"));
+		for (UserVO user : service.getUserList()) {
 			System.out.println(user);
 		}
 	}
-	
-	@Test @Ignore
+
+	@Test
+	@Ignore
 	public void updateUserTest() {
-		service.updateUser(new UserVO("dl","둘리","W","Busan"));
+		service.updateUser(new UserVO("dl", "둘리", "W", "Busan"));
 		UserVO user = service.getUser("dl");
 		System.out.println(user);
 	}
-	
-	@Test @Ignore
+
+	@Test
+	@Ignore
 	public void deleteUserTest() {
 		service.deleteUser("dl");
-		for(UserVO user : service.getUserList()) {
+		for (UserVO user : service.getUserList()) {
 			System.out.println(user);
 		}
 	}
