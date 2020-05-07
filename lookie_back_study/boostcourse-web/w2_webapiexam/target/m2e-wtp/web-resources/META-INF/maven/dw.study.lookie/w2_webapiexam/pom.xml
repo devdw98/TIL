@@ -9,36 +9,35 @@
 	<name>w2_webapiexam Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<!-- web.xml 파일을 삭제해도 eclipse에서 오류가 발생하지 않는다. -->
-		<failOnMissingWebXml>false</failOnMissingWebXml>
+	<!-- web.xml 파일을 삭제해도 eclipse에서 오류가 발생하지 않는다. -->
+	<failOnMissingWebXml>false</failOnMissingWebXml>
 	</properties>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.45</version>
+			<version>8.0.19</version>
 		</dependency>
-
-		<!-- json 라이브러리 databind jackson-core, jackson-annotaion에 의존성이 있다. -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.4</version>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
