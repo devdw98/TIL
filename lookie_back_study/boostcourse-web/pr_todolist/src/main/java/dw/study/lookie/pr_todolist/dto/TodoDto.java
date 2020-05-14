@@ -10,6 +10,30 @@ public class TodoDto {
 	private int sequence;
 	private String type;
 	private String regDate;
+	
+	//입력 시 사용할 생성자
+	public TodoDto(String title, String name, int sequence) { 
+		super();
+		this.title = title;
+		this.name = name;
+		this.sequence = sequence;
+	}
+	//list 출력 시 사용할 생성자
+	public TodoDto(Long id, String title, String name, int sequence, String type, String regDate) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.name = name;
+		this.sequence = sequence;
+		this.type = type;
+		this.regDate = regDate;
+	}
+	//업데이트 시 사용할 생성자
+	public TodoDto(Long id, String type) {
+		super();
+		this.id = id;
+		this.type = type;
+	}
 	public Long getId() {
 		return id;
 	}
