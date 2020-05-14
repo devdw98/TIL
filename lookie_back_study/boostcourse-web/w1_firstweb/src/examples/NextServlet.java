@@ -35,7 +35,7 @@ public class NextServlet extends HttpServlet {
 		out.println("<body>");
 		
 		int dice = (Integer)request.getAttribute("dice");
-		out.println("dice : "+dice);
+		out.println("dice : "+dice+"<br>");
 		
 		for(int i=0;i<dice;i++) {
 			out.print("Hello!<br>");
