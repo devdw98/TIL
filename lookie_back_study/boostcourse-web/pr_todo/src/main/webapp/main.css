@@ -1,0 +1,49 @@
+table {
+  width: 100%;
+  border-collapse: seperate;
+  border-spacing: 20px 20px;
+  text-align: center;
+
+}
+th {background: rgb(240, 146, 148);
+font-size: 2em;}
+td{background:rgb(240, 194, 148);
+font-size: 1.5em}
+#ex_title{
+  text-align: left;
+  padding-left: 30px;
+  transform:rotate(-4deg);
+}
+#header {
+  border: 50px;
+  text-align: right;
+  padding-top: 50px;
+  padding-right: 50px;
+}
+
+.nav-list {
+  color:blue;
+
+}
+#new-button{
+  font-size: 2em;
+  border: 1px solid skyblue;
+  border-radius: 5px;
+  background-color: skyblue;
+  color: white;
+  padding: 5px;
+}
+
+#todo-list{
+  width:33%;
+  float:left;
+}
+#doing-list{
+  width:33%;
+  float:left;
+}
+
+#done-list{
+  width:33%;
+  float:left;
+}
