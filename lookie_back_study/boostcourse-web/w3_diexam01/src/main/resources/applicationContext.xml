@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- root element-가장 바깥쪽 태그 : beans element -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsl="http://www.w3.org/2001/XMLSchema-instance"
+	xsl:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="userBean" class="dw.study.lookie.w3_diexam01.UserBean" />
+	<!-- UserBean userBean = new UserBean(); 과 같은 의미 -->
+	<!-- 객체를 하나만 가지고있는 패턴 : 싱글톤 패턴 -->
+	
+	<bean id="e" class="dw.study.lookie.w3_diexam01.Engine"/>
+	<bean id="c" class="dw.study.lookie.w3_eidxam01.Car">
+		<property name="engine" ref="e"></property> 
+		<!-- ref: 위에서 생성한 bean을 이곳에서 사용하겠다 선언 -->
+	</bean>
+</beans>

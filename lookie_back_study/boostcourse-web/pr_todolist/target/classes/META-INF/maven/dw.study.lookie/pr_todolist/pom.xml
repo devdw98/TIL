@@ -49,7 +49,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>w2_webapiexam</finalName>
+		<finalName>pr_todolist</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
