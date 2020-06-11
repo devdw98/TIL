@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+
+	<display-name>Spring JavaConfig Sample</display-name>
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+		</param-value>
+	</context-param>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>dw.study.lookie.w3_guestbook.config.ApplicationConfig
+		</param-value>
+	</context-param>
+	<!-- 특정 이벤트가 일어났을 때 동작하는 것. Context가 로딩될 때 (run on server) 불려짐 -->
+	<!-- 위의 context-param에 등록된 값들을 참조함 -->
+	<listener>
+
+		<listener-class>org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+
+	<servlet>
+		<!--DispatcherServlet을 프론트 서블릿으로 등록하는 과정 -->
+		<servlet-name>mvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet
+		</servlet-class> <!-- 모든 요청은 DispatcherServlet이 받을 것임 -->
+		<init-param>
+			<!-- annotationapplicationContext를 사용할 것이라고 지정 -->
+			<param-name>contextClass</param-name>
+			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+			</param-value>
+		</init-param>
+		<init-param>
+			<!-- dispatcherservlet 실행 시 이곳의 설정을 참고하세요 -->
+			<param-name>contextConfigLocation</param-name>
+			<param-value>dw.study.lookie.w3_guestbook.config.WebMvcContextConfiguration
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mvc</servlet-name>
+		<url-pattern>/</url-pattern> <!-- 모든 요청을 받을 것임 -->
+	</servlet-mapping>
+
+	<filter>
+		<!-- 요청 수행되기 전, 응답이 나가기 전에 한 번 씩 걸쳐서 수행을 할 수 있도록 함 밑의 필터는 한글 인코딩을 위해 사용 -->
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<!-- 모든 요청에 대해 지정 -->
+	</filter-mapping>
+
+</web-app>
