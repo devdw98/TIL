@@ -18,13 +18,13 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @EnableTransactionManagement
 public class DBConfig implements TransactionManagementConfigurer{
 
-	@Value("${spring.datasource.driver-class-name")
+	@Value("${spring.datasource.driver-class-name}")
 	String driverClassName;
 	@Value("${spring.datasource.url}")
 	String url;
-	@Value("${spring.datasource.username")
+	@Value("${spring.datasource.username}")
 	String username;
-	@Value("${spring.datasource.password")
+	@Value("${spring.datasource.password}")
 	String password;
 	
 	@Bean

@@ -12,7 +12,7 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 	protected Class<?>[] getRootConfigClasses() {
 		return new Class<?>[] {ApplicationConfig.class};
 	}
-
+	
 	//Spring MVC 설정 파일 클래스 지정
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
@@ -24,6 +24,8 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 	protected String[] getServletMappings() {
 		return new String[] {"/"};
 	}
+	
+	//필터 설정
 	@Override
 	protected Filter[] getServletFilters() {
 		CharacterEncodingFilter encodingFilter=new CharacterEncodingFilter();

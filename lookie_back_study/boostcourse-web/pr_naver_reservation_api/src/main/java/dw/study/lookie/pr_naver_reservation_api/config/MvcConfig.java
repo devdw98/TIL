@@ -26,17 +26,17 @@ public class MvcConfig implements WebMvcConfigurer {
 		configurer.enable();
 	}
 
-	@Bean
-	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.ant("/api/**"))
-				.build().apiInfo(apiInfo()).useDefaultResponseMessages(false);
-	}
-
-	private ApiInfo apiInfo() {
-		Contact contact = new Contact("박도원", "https://github.com/devdw98", "devdw98@gmail.com");
-		ApiInfo apiInfo = new ApiInfo("title", "description", "version", "termsOfServiceUrl", contact, "license", "licenseUrl", null);
-		return apiInfo;
-	}
+//	@Bean
+//	public Docket api() {
+//		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
+//				.paths(PathSelectors.ant("/api/**"))
+//				.build().apiInfo(apiInfo()).useDefaultResponseMessages(false);
+//	}
+//
+//	private ApiInfo apiInfo() {
+//		Contact contact = new Contact("박도원", "https://github.com/devdw98", "devdw98@gmail.com");
+//		ApiInfo apiInfo = new ApiInfo("title", "description", "version", "termsOfServiceUrl", contact, "license", "licenseUrl", null);
+//		return apiInfo;
+//	}
 
 }
