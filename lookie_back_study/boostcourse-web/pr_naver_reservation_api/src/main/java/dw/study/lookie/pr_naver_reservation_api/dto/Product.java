@@ -20,7 +20,7 @@ public class Product {
 	private String email; //display_info
 	private Date createDate; //display_info
 	private Date modifyDate; //display_info
-	private int fileId; //product_image
+	private int fileId; //product_image - type = 'ma'
 	
 	public int getId() {
 		return id;

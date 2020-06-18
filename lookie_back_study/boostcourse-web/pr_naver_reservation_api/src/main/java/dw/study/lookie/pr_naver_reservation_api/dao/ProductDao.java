@@ -23,18 +23,28 @@ public class ProductDao {
 		this.jdbc = new NamedParameterJdbcTemplate(ds);
 	}
 
-	public int selectAllCount() {
-		return jdbc.queryForObject(ProductDaoSqls.SELECT_ALL_COUNT, Collections.emptyMap(), Integer.class);
+	public int selecAllProductsCount() {
+		return jdbc.queryForObject(ProductDaoSqls.SELECT_COUNT_ALL_PRODUCTS, Collections.emptyMap(), Integer.class);
 	}
 
-//	public int selectPagingCount() {
-//		return jdbc.queryForObject(ProductDaoSqls.SELECT_PAGING, Collections.emptyMap(), Integer.class);
-//	}
-	public List<Product> selectProductInfo(Integer categoryId, Integer start, Integer limit) {
+	public int selectCountProductByCategory(Integer categoryId) {
+		Map<String, Integer> params = new HashMap<>();
+		params.put("categoryId", categoryId);
+		return jdbc.queryForObject(ProductDaoSqls.SELECT_COUNT_PRODUCTS_BY_CATEGORY, params, Integer.class);
+	}
+
+	public List<Product> selectAllProductsInfo(Integer start, Integer end) {
+		Map<String, Integer> params = new HashMap<>();
+		params.put("start", start);
+		params.put("end", end);
+		return jdbc.query(ProductDaoSqls.SELECT_ALL_PRODUCTS_INFO, params, rowMapper);
+	}
+
+	public List<Product> selectProductsInfoByCategory(Integer categoryId, Integer start, Integer end) {
 		Map<String, Integer> params = new HashMap<>();
 		params.put("categoryId", categoryId);
 		params.put("start", start);
-		params.put("limit", limit);
+		params.put("end", end);
 		return jdbc.query(ProductDaoSqls.SELECT_PRODUCTS_INFO, params, rowMapper);
 	}
 

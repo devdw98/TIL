@@ -11,48 +11,59 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dw.study.lookie.pr_naver_reservation_api.dto.Category;
+import dw.study.lookie.pr_naver_reservation_api.dto.Product;
 import dw.study.lookie.pr_naver_reservation_api.dto.Promotion;
-import dw.study.lookie.pr_naver_reservation_api.service.CategoryService;
-import dw.study.lookie.pr_naver_reservation_api.service.PromotionService;
+import dw.study.lookie.pr_naver_reservation_api.service.MainService;
 
 @RestController
 @RequestMapping(path = "/api")
 public class ReservationApiController {
 
 	@Autowired
-	private CategoryService categoryService;
-	@Autowired
-	private PromotionService promotionService;
+	private MainService mainService;
 
 	// Main Page
 	@GetMapping("/categories") // 카테고리 목록
 	public Map<String, Object> categoryList() {
 
-		List<Category> list = categoryService.getCategoryList();
-		int size = categoryService.getCount();
+		List<Category> list = mainService.getCategoryList();
+		int size = mainService.getCountCategory();
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("size", size);
 		map.put("items", list);
 		return map;
 	}
-	
-	@GetMapping("/displayinfos") //상품 목록
-	public String productList(@RequestParam("categoryId")int categoryId, @RequestParam("start")int start) {
-		return "상품목록";
+
+	@GetMapping("/displayinfos") // 상품 목록
+	public Map<String, Object> productList(
+			@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId,
+			@RequestParam(name = "start", required = false, defaultValue = "0") int start) {
+
+		int totalCount = mainService.getCountProduct(categoryId);
+		int productCount = MainService.LIMIT; //여기 추가로 해야함
+		List<Product> list = mainService.getProductInfos(categoryId, start);
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("totalCount", totalCount);
+		map.put("productCount", productCount);
+		map.put("products", list);
+		return map;
 	}
-	
-	@GetMapping("/promotions") //프로모션 목록
+
+	@GetMapping("/promotions") // 프로모션 목록
 	public Map<String, Object> promotionList() {
-		List<Promotion> list = promotionService.getPromotionList();
-		int size = promotionService.getCount();
-		
+
+		List<Promotion> list = mainService.getPromotionList();
+
+		int size = mainService.getCountPromotion();
+
 		Map<String, Object> map = new HashMap<>();
 		map.put("size", size);
 		map.put("items", list);
 		return map;
 	}
-	
+
 //	//ProductPage
 //	@GetMapping("/displayinfos/{id}") //전시 정보
 //	public String productInfo() {
