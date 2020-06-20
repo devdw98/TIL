@@ -42,6 +42,13 @@ public class MemberServiceImpl implements MemberService{
         
         return list;
     }
+    
+    @Override
+    @Transactional
+    public Member getMemberByEmail(String loginUserId) {
+    	Member member = memberDao.getMemberByEmail(loginUserId);
+    	return member;
+    }
 	
 
 }
