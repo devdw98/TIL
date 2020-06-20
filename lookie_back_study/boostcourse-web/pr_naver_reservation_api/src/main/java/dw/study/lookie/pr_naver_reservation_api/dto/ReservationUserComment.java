@@ -1,6 +1,7 @@
 package dw.study.lookie.pr_naver_reservation_api.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class ReservationUserComment {
 	private int id; //reservation_user_comment
@@ -11,7 +12,7 @@ public class ReservationUserComment {
 	private String comment; //reservation_user_comment
 	private Date createDate; //reservation_user_comment
 	private Date modifyDate; //reservation_user_comment
-	private Image[] reservationUserCommentImages;
+	private List<ReservationUserCommentImage> reservationUserCommentImages;
 	
 	public int getId() {
 		return id;
@@ -61,12 +62,20 @@ public class ReservationUserComment {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
-	public Image[] getReservationUserCommentImages() {
+	public List<ReservationUserCommentImage> getReservationUserCommentImages() {
 		return reservationUserCommentImages;
 	}
-	public void setReservationUserCommentImages(Image[] reservationUserCommentImages) {
+	public void setReservationUserCommentImages(List<ReservationUserCommentImage> reservationUserCommentImages) {
 		this.reservationUserCommentImages = reservationUserCommentImages;
 	}
+	@Override
+	public String toString() {
+		return "ReservationUserComment [id=" + id + ", productId=" + productId + ", reservationInfoId="
+				+ reservationInfoId + ", score=" + score + ", reservationEmail=" + reservationEmail + ", comment="
+				+ comment + ", createDate=" + createDate + ", modifyDate=" + modifyDate
+				+ ", reservationUserCommentImages=" + reservationUserCommentImages + "]";
+	}
+	
 	
 	
 }

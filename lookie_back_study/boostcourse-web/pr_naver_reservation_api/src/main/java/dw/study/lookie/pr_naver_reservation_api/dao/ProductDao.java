@@ -1,5 +1,6 @@
 package dw.study.lookie.pr_naver_reservation_api.dao;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -13,10 +14,11 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import dw.study.lookie.pr_naver_reservation_api.dto.DisplayInfoImage;
-import dw.study.lookie.pr_naver_reservation_api.dto.Image;
 import dw.study.lookie.pr_naver_reservation_api.dto.Product;
 import dw.study.lookie.pr_naver_reservation_api.dto.ProductImage;
 import dw.study.lookie.pr_naver_reservation_api.dto.ProductPrice;
+import dw.study.lookie.pr_naver_reservation_api.dto.ReservationUserComment;
+import dw.study.lookie.pr_naver_reservation_api.dto.ReservationUserCommentImage;
 
 @Repository
 public class ProductDao {
@@ -74,6 +76,32 @@ public class ProductDao {
 		Map<String, Integer> params = new HashMap<>();
 		params.put("displayId", displayId);
 		return jdbc.query(ProductDaoSqls.SELECT_PRODUCT_PRICE, params, BeanPropertyRowMapper.newInstance(ProductPrice.class));
+	}
+	
+	public List<Integer> selectDisplayInfoScore(Integer displayId){
+		Map<String, Integer> params = new HashMap<>();
+		params.put("displayId", displayId);
+		return jdbc.queryForList(ProductDaoSqls.SELECT_PRODUCT_SCORE, params,Integer.class);
+	}
+	
+	public int selectCountProductComments(Integer productId) {
+		Map<String, Integer> params = new HashMap<>();
+		params.put("productId", productId);
+		return jdbc.queryForObject(ProductDaoSqls.SELECT_COUNT_PRODUCT_COMMENT, params, Integer.class);
+	}
+	
+	public List<ReservationUserComment> selectProductComments(Integer productId, Integer start, Integer end){
+		Map<String, Integer> params = new HashMap<>();
+		params.put("productId", productId);
+		params.put("start", start);
+		params.put("end", end);
+		return jdbc.query(ProductDaoSqls.SELECT_PRODUCT_RESERVATION_USER_COMMENTS, params, BeanPropertyRowMapper.newInstance(ReservationUserComment.class));
+	}
+	
+	public List<ReservationUserCommentImage> selectProductCommentImages(Integer commentId ){
+		Map<String, Integer> params = new HashMap<>();
+		params.put("commentId", commentId);
+		return jdbc.query(ProductDaoSqls.SELECT_PRODUCT_RESERVATION_USER_COMMENTS_IMAGE, params, BeanPropertyRowMapper.newInstance(ReservationUserCommentImage.class));
 	}
 
 }

@@ -17,6 +17,8 @@ import dw.study.lookie.pr_naver_reservation_api.dto.Product;
 import dw.study.lookie.pr_naver_reservation_api.dto.ProductImage;
 import dw.study.lookie.pr_naver_reservation_api.dto.ProductPrice;
 import dw.study.lookie.pr_naver_reservation_api.dto.Promotion;
+import dw.study.lookie.pr_naver_reservation_api.dto.ReservationUserComment;
+import dw.study.lookie.pr_naver_reservation_api.dto.ReservationUserCommentImage;
 import dw.study.lookie.pr_naver_reservation_api.service.DisplayService;
 import dw.study.lookie.pr_naver_reservation_api.service.MainService;
 
@@ -72,39 +74,38 @@ public class ReservationApiController {
 	}
 
 	// ProductPage
-//	@GetMapping("/displayinfos/{id}") // 전시 정보
-//	public Map<String, Object> productInfo(@PathVariable(name="id") int id ) {
-//		
-//		Product information = displayService.getProductInfo(id);
-//		List<Image> productImages = displayService.getProductImageInfoList(id);
-//		List<Image> displayInfoImages = displayService.getDisplayInfoImageList(id);
-//		int avgScore = displayService.getAvgScore(id);
-//		List<ProductPrice> productPrices = displayService.getProductPriceList(id);
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("product",information);
-//		map.put("productImages", productImages);
-//		map.put("displayInfoImages", displayInfoImages);
-//		map.put("avgScore", avgScore);
-//		map.put("productPrices",productPrices);
-//		return map;
-//	}
-	
-	@GetMapping("/displayinfos/{displayId}") //전시정보
-	public Map<String, Object> productInfo(@PathVariable(name="displayId") int displayId ){
+	@GetMapping("/displayinfos/{displayId}") // 전시정보
+	public Map<String, Object> productInfo(@PathVariable(name = "displayId") int displayId) {
 		Product productInfo = displayService.getProductInfo(displayId);
+		int avgScore = displayService.getAvgScore(displayId);
 		List<ProductImage> productImages = displayService.getProductImageInfoList(displayId);
 		List<DisplayInfoImage> displayInfoImages = displayService.getDisplayInfoImageList(displayId);
 		List<ProductPrice> productPrices = displayService.getProductPriceList(displayId);
-		
+
 		Map<String, Object> map = new HashMap<>();
 		map.put("product", productInfo);
 		map.put("productImages", productImages);
 		map.put("displayInfoImages", displayInfoImages);
+		map.put("avgScore", avgScore);
 		map.put("productPrices", productPrices);
 		return map;
 	}
+	
 
-//	public Map<String, Object> productCommentList() //상품의 댓글 목록
+	@GetMapping("/displayinfos/product")
+	public Map<String, Object> productCommentList(
+			@RequestParam(name = "productId", required = false, defaultValue ="0" ) int productId,
+			@RequestParam(name = "start", required = false, defaultValue = "0") int start){ //상품의 댓글 목록
+	
+		int totalCount = displayService.getCountProductReservationUserComment(productId);
+		int commentCount = displayService.LIMIT; // 여기 추가로 해야함 - 의도를 모르겠음
+		List<ReservationUserComment> reservationUserComments = displayService.getProductReservationUserCommentList(productId, start);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("totalCount", totalCount);
+		map.put("commentCount", commentCount);
+		map.put("reservationUserComments", reservationUserComments);
+		return map;
 
-
+	}
 }
