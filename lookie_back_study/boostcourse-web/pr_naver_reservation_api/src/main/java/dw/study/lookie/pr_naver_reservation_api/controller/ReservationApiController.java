@@ -18,9 +18,11 @@ import dw.study.lookie.pr_naver_reservation_api.dto.ProductImage;
 import dw.study.lookie.pr_naver_reservation_api.dto.ProductPrice;
 import dw.study.lookie.pr_naver_reservation_api.dto.Promotion;
 import dw.study.lookie.pr_naver_reservation_api.dto.ReservationUserComment;
-import dw.study.lookie.pr_naver_reservation_api.dto.ReservationUserCommentImage;
 import dw.study.lookie.pr_naver_reservation_api.service.DisplayService;
 import dw.study.lookie.pr_naver_reservation_api.service.MainService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -32,6 +34,11 @@ public class ReservationApiController {
 	private DisplayService displayService;
 
 	// Main Page
+	 @ApiOperation(value = "카테고리 목록 조회")
+	    @ApiResponses({  // Response Message에 대한 Swagger 설명
+	            @ApiResponse(code = 200, message = "OK"),
+	            @ApiResponse(code = 500, message = "Exception")
+	    })
 	@GetMapping("/categories") // 카테고리 목록
 	public Map<String, Object> categoryList() {
 
@@ -43,7 +50,12 @@ public class ReservationApiController {
 		map.put("items", list);
 		return map;
 	}
-
+	 
+	 @ApiOperation(value = "상품 목록 조회")
+	    @ApiResponses({  // Response Message에 대한 Swagger 설명
+	            @ApiResponse(code = 200, message = "OK"),
+	            @ApiResponse(code = 500, message = "Exception")
+	    })
 	@GetMapping("/displayinfos") // 상품 목록
 	public Map<String, Object> productList(
 			@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId,
@@ -59,7 +71,11 @@ public class ReservationApiController {
 		map.put("products", list);
 		return map;
 	}
-
+	 @ApiOperation(value = "프로모션 목록 조회")
+	    @ApiResponses({  // Response Message에 대한 Swagger 설명
+	            @ApiResponse(code = 200, message = "OK"),
+	            @ApiResponse(code = 500, message = "Exception")
+	    })
 	@GetMapping("/promotions") // 프로모션 목록
 	public Map<String, Object> promotionList() {
 
@@ -74,6 +90,11 @@ public class ReservationApiController {
 	}
 
 	// ProductPage
+	 @ApiOperation(value = "전시 정보 조회")
+	    @ApiResponses({  // Response Message에 대한 Swagger 설명
+	            @ApiResponse(code = 200, message = "OK"),
+	            @ApiResponse(code = 500, message = "Exception")
+	    })
 	@GetMapping("/displayinfos/{displayId}") // 전시정보
 	public Map<String, Object> productInfo(@PathVariable(name = "displayId") int displayId) {
 		Product productInfo = displayService.getProductInfo(displayId);
@@ -91,7 +112,11 @@ public class ReservationApiController {
 		return map;
 	}
 	
-
+	 @ApiOperation(value = "상품 댓글 조회")
+	    @ApiResponses({  // Response Message에 대한 Swagger 설명
+	            @ApiResponse(code = 200, message = "OK"),
+	            @ApiResponse(code = 500, message = "Exception")
+	    })
 	@GetMapping("/displayinfos/product")
 	public Map<String, Object> productCommentList(
 			@RequestParam(name = "productId", required = false, defaultValue ="0" ) int productId,
