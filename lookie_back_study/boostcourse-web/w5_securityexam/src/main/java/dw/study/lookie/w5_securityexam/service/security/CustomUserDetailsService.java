@@ -9,7 +9,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CustomUserDetailsService implements UserDetailsService{
 
 	@Autowired
@@ -29,7 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 		customUserDetails.setPassword(customUser.getPassword());
 		
 		List<UserRoleEntity> customRoles = userdbService.getUserRoles(loginUserId);
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		List<GrantedAuthority> authorities = new ArrayList<>();
 		if(customRoles != null) {
 			for(UserRoleEntity customRole : customRoles) {
 				authorities.add(new SimpleGrantedAuthority(customRole.getRoleName()));
@@ -38,12 +40,11 @@ public class CustomUserDetailsService implements UserDetailsService{
 		
 		//CustomUserDetails 객체에 권한 목록 설정
 		customUserDetails.setAuthorities(authorities);
-		customUserDetails.setEnabled(true);
-		customUserDetails.setAccountNonExpired(true);
-		customUserDetails.setAccountNonLocked(true);
-		customUserDetails.setCredentialsNonExpired(true);
-		
-		return customUserDetails;
+        customUserDetails.setEnabled(true);
+        customUserDetails.setAccountNonExpired(true);
+        customUserDetails.setAccountNonLocked(true);
+        customUserDetails.setCredentialsNonExpired(true);
+        return customUserDetails;
 	}
 	
 }

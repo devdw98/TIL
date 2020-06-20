@@ -10,7 +10,7 @@
   <body>
     <div>
       <div>
-        <form method="post" action="/securityexam/authenticate">
+        <form method="post" action="/w5_securityexam/authenticate">
           <div>
             <label>ID</label>
             <input type="text" name="userId">
