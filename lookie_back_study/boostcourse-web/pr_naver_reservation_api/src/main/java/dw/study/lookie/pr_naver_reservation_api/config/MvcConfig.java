@@ -7,6 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import springfox.documentation.builders.PathSelectors;
@@ -18,6 +21,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+//스프링 mvc 설정파일
 @Configuration
 @EnableWebMvc
 @EnableSwagger2
@@ -29,6 +33,23 @@ public class MvcConfig implements WebMvcConfigurer {
 		configurer.enable();
 	}
 	
+	@Override //spring mvc 에서 jsp view가 위치하는 경로 설정
+	public void configureViewResolvers(ViewResolverRegistry registry) {
+		registry.jsp("/WEB-INF/view/", ".jsp");
+	}
+	
+	@Override // '/'로 요청 오면 '/main'으로 리다이렉트 함
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addRedirectViewController("/", "/main");
+	}
+	
+	@Override // /resources 경로에 있는 자료들을 /resources/** 로 접근하게 함
+	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+	
+	
+	//swagger2
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
