@@ -10,12 +10,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import dw.study.lookie.pr_naver_reservation_api.dto.Promotion;
+import dw.study.lookie.pr_naver_reservation_api.dto.PromotionDto;
 
 @Repository
 public class PromotionDao {
 	NamedParameterJdbcTemplate jdbc;
-	RowMapper<Promotion> rowMapper = BeanPropertyRowMapper.newInstance(Promotion.class);
+	RowMapper<PromotionDto> rowMapper = BeanPropertyRowMapper.newInstance(PromotionDto.class);
 	
 	public PromotionDao(DataSource ds) {
 		this.jdbc = new NamedParameterJdbcTemplate(ds);
@@ -25,7 +25,7 @@ public class PromotionDao {
 		return jdbc.queryForObject(PromotionDaoSqls.SELECT_COUNT, Collections.emptyMap(), Integer.class);
 	}
 	
-	public List<Promotion> selectAll(){
+	public List<PromotionDto> selectAll(){
 		return jdbc.query(PromotionDaoSqls.SELECT_ALL, rowMapper);
 	}
 }

@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import dw.study.lookie.pr_naver_reservation_api.dao.CategoryDao;
 import dw.study.lookie.pr_naver_reservation_api.dao.ProductDao;
 import dw.study.lookie.pr_naver_reservation_api.dao.PromotionDao;
-import dw.study.lookie.pr_naver_reservation_api.dto.Category;
-import dw.study.lookie.pr_naver_reservation_api.dto.Product;
-import dw.study.lookie.pr_naver_reservation_api.dto.Promotion;
+import dw.study.lookie.pr_naver_reservation_api.dto.CategoryDto;
+import dw.study.lookie.pr_naver_reservation_api.dto.ProductDto;
+import dw.study.lookie.pr_naver_reservation_api.dto.PromotionDto;
 import dw.study.lookie.pr_naver_reservation_api.service.MainService;
 
 @Service
@@ -30,13 +30,11 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
-	public int getCountProduct(Integer categoryId) {
-		int count;
-		if(categoryId == 0)
-			count = productDao.selecAllProductsCount();
+	public int getCountDisplayInfo(Integer categoryId) {
+		if (categoryId == 0)
+			return productDao.countAllDisplayInfo(categoryId);
 		else
-			count = productDao.selectCountProductByCategory(categoryId);
-		return count;
+			return productDao.countDisplayInfoByCategory(categoryId);
 	}
 
 	@Override
@@ -46,24 +44,22 @@ public class MainServiceImpl implements MainService {
 
 	@Override
 	@Transactional
-	public List<Category> getCategoryList() {
+	public List<CategoryDto> getCategoryList() {
 		return categoryDao.selectAll();
 	}
 
 	@Override
 	@Transactional
-	public List<Product> getProductInfos(Integer categoryId, Integer start) {
-		List<Product> list;
-		if(categoryId == 0)
-			list = productDao.selectAllProductsInfo(start, LIMIT);
+	public List<ProductDto> getDisplayInfos(Integer categoryId, Integer start) {
+		if (categoryId == 0)
+			return productDao.selectAllDisplayInfos(start, LIMIT);
 		else
-			list = productDao.selectProductsInfoByCategory(categoryId, start, LIMIT);
-		return list;
+			return productDao.selectDisplayInfosByCategory(categoryId, start, LIMIT);
 	}
 
 	@Override
 	@Transactional
-	public List<Promotion> getPromotionList() {
+	public List<PromotionDto> getPromotionList() {
 		return promotionDao.selectAll();
 	}
 

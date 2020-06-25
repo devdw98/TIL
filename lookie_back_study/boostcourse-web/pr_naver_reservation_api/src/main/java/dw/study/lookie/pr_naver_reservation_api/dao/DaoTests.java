@@ -7,16 +7,16 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import dw.study.lookie.pr_naver_reservation_api.config.ApplicationConfig;
-import dw.study.lookie.pr_naver_reservation_api.dto.Category;
+import dw.study.lookie.pr_naver_reservation_api.dto.CategoryDto;
 
 public class DaoTests {
 	public static void main(String[] args) {
 		ApplicationContext ac = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 		
 		CategoryDao cDao = ac.getBean(CategoryDao.class);
-		List<Category> categoryList = new ArrayList<Category>();
+		List<CategoryDto> categoryList = new ArrayList<CategoryDto>();
 		categoryList = cDao.selectAll();
-		for(Category c : categoryList) {
+		for(CategoryDto c : categoryList) {
 			System.out.println(c);
 		}
 		int count = cDao.selectCount();

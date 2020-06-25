@@ -43,10 +43,10 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addRedirectViewController("/", "/main");
 	}
 	
-	@Override // /resources 경로에 있는 자료들을 /resources/** 로 접근하게 함
-	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	}
+//	@Override // /resources 경로에 있는 자료들을 /resources/** 로 접근하게 함
+//	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+//		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+//	}
 	
 	
 	//swagger2
