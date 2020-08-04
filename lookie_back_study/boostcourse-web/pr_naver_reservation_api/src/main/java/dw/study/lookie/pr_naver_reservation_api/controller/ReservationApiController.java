@@ -3,6 +3,7 @@ package dw.study.lookie.pr_naver_reservation_api.controller;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.security.Principal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +32,7 @@ import dw.study.lookie.pr_naver_reservation_api.service.DisplayService;
 import dw.study.lookie.pr_naver_reservation_api.service.MainService;
 import dw.study.lookie.pr_naver_reservation_api.service.ReservationService;
 import dw.study.lookie.pr_naver_reservation_api.service.UserService;
+import dw.study.lookie.pr_naver_reservation_api.vo.DateInfo;
 import dw.study.lookie.pr_naver_reservation_api.vo.FileInfo;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -136,18 +141,20 @@ public class ReservationApiController {
 		return map;
 
 	}
-//	 
-//	 //Reservation
-//	 @PostMapping("/reservationInfos") //예약 등록하기
-//	 public Map<String, Object> enrollReservation(Principal principal, @RequestBody ReservationDto reservationInfo){
-//		 String loginId = principal.getName();
-//		 //user.id 구하기
-//		 int userId = userService.getUserId(loginId);
-//		 reservationInfo.setUserId(userId);
-//		 Map<String, Object> map = new HashMap<>();
-//		 
-//		 return map;
-//	 }
+
+	// Reservation
+	@PostMapping("/reservationInfos") // 예약 등록하기
+	public Map<String, Object> enrollReservation(Principal principal, @RequestBody ReservationInfoDto reservationInfo) {
+		String loginId = principal.getName();
+		// user.id 구하기
+		int userId = userService.getUserId(loginId);
+
+		reservationInfo.setUserId(userId);
+		ReservationInfoDto result = reservationService.enrollReservationInfo(reservationInfo);
+		Map<String, Object> map = new HashMap<>();
+		map.put("result", result);
+		return map;
+	}
 
 	@GetMapping("/reservationInfos") // 주문정보 구하기
 	public Map<String, Object> reservationList(Principal principal) {
@@ -162,20 +169,19 @@ public class ReservationApiController {
 		map.put("items", list);
 		return map;
 	}
-//	 
-//	 
-//	 @PutMapping("/reservationInfos") //예약 취소하기
-//	 public Map<String, Object> cancelReservation(Principal principal, @RequestBody String id){
-//		 String loginId = principal.getName();
-//		 //user.id 구하기
-//		 int userId = userService.getUserId(loginId);
-//		 String result = reservationService.cancelReservation(userId, Integer.valueOf(id));
-//		 
-//		 Map<String, Object> map = new HashMap<>();
-//		 map.put("result",result);
-//		 
-//		 return map;
-//	 }
+
+	@PutMapping("/reservationInfos/{id}") // 예약 취소하기
+	public Map<String, Object> cancelReservation(Principal principal, @PathVariable(name = "id") int id) {
+		String loginId = principal.getName();
+		// user.id 구하기
+		int userId = userService.getUserId(loginId);
+		String result = reservationService.cancelReservation(userId, id);
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("result", result);
+
+		return map;
+	}
 
 	@GetMapping("/files/{fileId}")
 	public void download(@PathVariable(name = "fileId") int fileId, HttpServletResponse response) {

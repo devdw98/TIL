@@ -26,34 +26,34 @@ public class GuestbookController {
 
 	@GetMapping("/list")
 	public String list(@RequestParam(name = "start", required = false, defaultValue = "0") int start, ModelMap model,
-			// HttpServletRequest request, 쿠키 실습
-			@CookieValue(value = "count", defaultValue = "0", required = true) String value,
+			 HttpServletRequest request,// 쿠키 실습
+//			@CookieValue(value = "count", defaultValue = "0", required = true) String value,
 			HttpServletResponse response) {
 
 		// Spring MVC 사용 안할 때 코드
-//		String value = null; // 쿠키는 string 값을 갖는다
-//		boolean find = false;
-//		Cookie[] cookies = request.getCookies(); // 쿠키를 가지고 있는지 확인
-//		if (cookies != null) {
-//			for (Cookie cookie : cookies) {
-//				if ("count".equals(cookie.getName())) {
-//					find = true;
-//					value = cookie.getValue();
-//					break;
-//				}
-//			}
-//		}
-//
-//		if (!find) {
-//			value = "1";
-//		} else {
+		String value = null; // 쿠키는 string 값을 갖는다
+		boolean find = false;
+		Cookie[] cookies = request.getCookies(); // 쿠키를 가지고 있는지 확인
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if ("count".equals(cookie.getName())) {
+					find = true;
+					value = cookie.getValue();
+					break;
+				}
+			}
+		}
+
+		if (!find) {
+			value = "1";
+		} else {
 		try {
 			int i = Integer.parseInt(value);
 			value = Integer.toString(i++);
 		} catch (Exception e) {
 			value = "1";
 		}
-//		}
+		}
 
 		Cookie cookie = new Cookie("count", value); // 새로운 값을 가진 쿠키 만들기(항상 해줘야 함)
 		cookie.setMaxAge(60 * 60 * 24 * 365); // 1년동안 쿠키 유지

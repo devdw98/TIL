@@ -2,7 +2,7 @@ package dw.study.lookie.pr_naver_reservation_api.dto;
 
 import dw.study.lookie.pr_naver_reservation_api.vo.ReservationInfoPrice;
 
-public class ReservationInfoPriceDto {
+public class ReservationInfoPriceDto extends ReservationInfoPrice{
 	private ReservationInfoPrice price;
 
 	public ReservationInfoPrice getPrice() {

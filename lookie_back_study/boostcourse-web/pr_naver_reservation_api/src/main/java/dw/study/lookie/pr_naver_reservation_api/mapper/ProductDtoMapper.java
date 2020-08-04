@@ -10,7 +10,7 @@ import dw.study.lookie.pr_naver_reservation_api.dto.ProductDto;
 public class ProductDtoMapper implements RowMapper<ProductDto>{
 	public ProductDto mapRow(ResultSet rs, int rowNum) throws SQLException{
 		ProductDto dto = new ProductDto();
-		dto.setId(rs.getInt("productId"));
+		dto.setId(rs.getInt("id"));
 		dto.setCategoryId(rs.getInt("categoryId"));
 		dto.setDisplayInfoId(rs.getInt("displayInfoId"));
 		dto.setName(rs.getString("name"));

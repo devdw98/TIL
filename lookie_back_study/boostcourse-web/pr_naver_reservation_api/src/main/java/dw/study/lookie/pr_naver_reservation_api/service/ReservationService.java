@@ -7,9 +7,9 @@ import dw.study.lookie.pr_naver_reservation_api.dto.ReservationInfoDto;
 import dw.study.lookie.pr_naver_reservation_api.dto.ReservationInfoPriceDto;
 
 public interface ReservationService {
-	public ReservationDto enrollReservationInfo();
+	public ReservationInfoDto enrollReservationInfo(ReservationInfoDto reservationInfo);
 
-	public ReservationInfoPriceDto enrollReservationInfoPrice();
+//	public ReservationInfoPriceDto enrollReservationInfoPrice();
 
 	public List<ReservationInfoDto> getReservationInfoList(int userId);
 
