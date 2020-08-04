@@ -19,22 +19,30 @@ public class SpringConfig {
 //        this.ds = ds;
 //    }
 //    @PersistenceContext
-    private EntityManager em;
+//    private EntityManager em;
+//
+//    @Autowired
+//    public SpringConfig(EntityManager em) {
+//        this.em = em;
+//    }
+
+    private final MemberRepository memberRepository; // spring-data-jpa 만들어놓은 구현체가 자동 등록됨
 
     @Autowired
-    public SpringConfig(EntityManager em) {
-        this.em = em;
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     @Bean
     public MemberService memberService(){
-        return new MemberService(memberRepository());
+//        return new MemberService(memberRepository());
+        return new MemberService(memberRepository); //의존관계 세팅
     }
-    @Bean
-    public MemberRepository memberRepository(){
+//    @Bean
+//    public MemberRepository memberRepository(){
 //        return new MemoryMemberRepository();
 //        return new JdbcMemberRepository(ds);
 //        return new JdbcTemplateMemberRepository(ds);
-        return new JpaMemberRepository(em);
-    }
+//        return new JpaMemberRepository(em);
+//    }
 }
