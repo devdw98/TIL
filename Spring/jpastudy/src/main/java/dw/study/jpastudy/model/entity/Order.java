@@ -22,6 +22,10 @@ public class Order {
     @JoinColumn(name="MEMBER_ID")
     private Member member;
 
+    @OneToOne
+    @JoinColumn(name="DELIVERY_ID")
+    private Delivery delivery;
+
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
 
@@ -29,4 +33,22 @@ public class Order {
     private Date orderDate;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    public void setMember(Member member) {
+        if(this.member != null) //기존 관계 제거
+            this.member.getOrders().remove(this);
+        this.member = member;
+        member.getOrders().add(this);
+    }
+
+    public void addOrderItem(OrderItem item){
+        orderItems.add(item);
+        item.setOrder(this);
+    }
+
+    public void setDelivery(Delivery delivery){
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
+
 }
