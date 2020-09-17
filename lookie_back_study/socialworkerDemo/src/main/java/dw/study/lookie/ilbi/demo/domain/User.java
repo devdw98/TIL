@@ -1,5 +1,6 @@
 package dw.study.lookie.ilbi.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,11 +26,25 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
+    private String name; //이름
+
+    @Column
+    private String nickname; //닉네임
+
+    @Column
+    private String username; //아이디
+
     @Column(length = 100, nullable = false, unique = true)
-    private String email;
+    private String email; //이메일
 
     @Column(length = 300, nullable = false)
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
+    @Column
+    private String role;
+
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
@@ -37,14 +52,12 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
+//        return this.roles.stream()
+//                .map(SimpleGrantedAuthority::new)
+//                .collect(Collectors.toList());
+        List<GrantedAuthority> auth = new ArrayList<>();
+        auth.add(new SimpleGrantedAuthority(this.getRole()));
+        return auth;
     }
 
     @Override

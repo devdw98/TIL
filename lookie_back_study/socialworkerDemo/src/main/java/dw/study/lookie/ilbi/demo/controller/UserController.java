@@ -3,41 +3,132 @@ package dw.study.lookie.ilbi.demo.controller;
 import dw.study.lookie.ilbi.demo.config.JwtTokenProvider;
 import dw.study.lookie.ilbi.demo.domain.User;
 import dw.study.lookie.ilbi.demo.repository.UserRepository;
+import dw.study.lookie.ilbi.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
+@EnableWebMvc
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
-    private final PasswordEncoder passwordEncoder;
-    private final JwtTokenProvider jwtTokenProvider;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    // 회원가입
-    @PostMapping("/join")
-    public Long join(@RequestBody Map<String, String> user) {
-        return userRepository.save(User.builder()
-                .email(user.get("email"))
-                .password(passwordEncoder.encode(user.get("password")))
-                .roles(Collections.singletonList("ROLE_USER")) // 최초 가입시 USER 로 설정
-                .build()).getId();
+    @PostMapping //회원가입
+    public ResponseEntity<?> saveUser(@RequestBody Map<String, ?> req){
+        Map<String, Boolean> json = new HashMap<>();
+        User user = User.builder()
+                .name(req.get("name").toString())
+                .nickname(req.get("nickname").toString())
+                .username(req.get("username").toString())
+                .email(req.get("email").toString())
+                .password(req.get("password").toString())
+                .build();
+        json.put("success",userService.register(user));
+        if(json.get("success"))
+            return new ResponseEntity<>(json, HttpStatus.CREATED);
+        else
+            return new ResponseEntity<>(json, HttpStatus.BAD_REQUEST);
     }
 
-    // 로그인
-    @PostMapping("/login")
-    public String login(@RequestBody Map<String, String> user) {
-        User member = userRepository.findByEmail(user.get("email"))
-                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 E-MAIL 입니다."));
-        if (!passwordEncoder.matches(user.get("password"), member.getPassword())) {
-            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
+    @GetMapping("/checkUsername/{username}")
+    public ResponseEntity<?> checkDuplicateUsername(@RequestBody String username){ //중복 아이디 검사
+        Map<String, Boolean> json = new HashMap<>();
+        json.put("success",userService.checkUsername(username));
+        return new ResponseEntity<>(json, HttpStatus.OK);
+    }
+
+    @GetMapping("/checkNickname/{nickname}")
+    public ResponseEntity<?> checkDuplicateNickname(@RequestBody String nickname){ //중복 닉네임 검사
+        Map<String, Boolean> json = new HashMap<>();
+        json.put("success", userService.checkNickname(nickname));
+        return new ResponseEntity<>(json, HttpStatus.OK);
+    }
+
+//    @GetMapping("/user")
+//    public ResponseEntity<?> getUserInfo(@RequestBody String token){ //회원 정보 조회
+//        Map<String, Object> json = new HashMap<>();
+//
+////        if(user != null) {
+////            json.put("success", true);
+////            json.put("userInfo", user);
+////        }else{
+////            json.put("success", false);
+////        }
+//        return new ResponseEntity<>(HttpStatus.OK); //test
+//    }
+//
+//    @PutMapping
+//    public ResponseEntity<?> updateUserInfo(@RequestBody User req){ //회원 정보 수정
+//        Map<String, Object> json = new HashMap<>();
+//        User nUser = userService.update(req);
+//        if(nUser != null) {
+//            json.put("user", nUser);
+//            json.put("success", true);
+//        }
+//        else
+//            json.put("success", false);
+//        return new ResponseEntity<>(json, HttpStatus.OK);
+//    }
+
+    @PatchMapping
+    public ResponseEntity<?> modifyPassword(@RequestBody Map<String, Object> req){ //비밀번호 수정
+        Map<String, Object> json = new HashMap<>();
+        json.put("success", userService.updatePassword((Long)req.get("id"), req.get("oldPassword").toString(), req.get("newPassword").toString()));
+        return new ResponseEntity<>(json, HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deleteUser(@RequestBody Map<String, Long> req){ //회원 정보 삭제
+        Map<String, Object> json = new HashMap<>();
+        json.put("success", userService.delete(req.get("id")));
+        return new ResponseEntity<>(json, HttpStatus.OK);
+    }
+
+    @GetMapping("/findUsername") //아이디 찾기
+    public ResponseEntity<?> findUsername(@RequestBody Map<String, String> req){
+        Map<String, Object> json = new HashMap<>();
+        json.put("username", userService.findUsername(req.get("name"),req.get("email")));
+        if(json.get("username") != null){
+            json.put("success", true);
+        }else{
+            json.put("success",false);
         }
-        return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
+        return new ResponseEntity<>(json, HttpStatus.OK);
     }
+
+//    @GetMapping("/findPassword")
+//    public ResponseEntity<?> findPassword(@RequestBody Map<String, String> req){ //임시 비밀번호 생성해주기
+//        Map<String, Object> json = new HashMap<>();
+//        json.put("success", userService.findPassword(req.get("name"),req.get("username")));
+//
+//        return new ResponseEntity<>(json, HttpStatus.OK);
+//    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Map<String, String> req){ //로그인
+        Map<String, Object> json = new HashMap<>();
+        MultiValueMap<String,String> header = new LinkedMultiValueMap<>();
+        String token = userService.checkLogin(req.get("username"), req.get("password"));
+        if(token != null) {
+            header.add("X-AUTH-TOKEN", token);
+            json.put("success", req.get("username"));
+        }
+        else
+            json.put("success", false);
+        return new ResponseEntity<>(json,header, HttpStatus.OK);
+    }
+
+
 }
