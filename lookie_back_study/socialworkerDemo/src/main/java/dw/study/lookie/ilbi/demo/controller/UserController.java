@@ -34,6 +34,7 @@ public class UserController {
                 .username(req.get("username").toString())
                 .email(req.get("email").toString())
                 .password(req.get("password").toString())
+                .location(req.get("location").toString())
                 .build();
         json.put("success",userService.register(user));
         if(json.get("success"))
@@ -43,14 +44,14 @@ public class UserController {
     }
 
     @GetMapping("/checkUsername/{username}")
-    public ResponseEntity<?> checkDuplicateUsername(@RequestBody String username){ //중복 아이디 검사
+    public ResponseEntity<?> checkDuplicateUsername(@PathVariable String username){ //중복 아이디 검사
         Map<String, Boolean> json = new HashMap<>();
         json.put("success",userService.checkUsername(username));
         return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
     @GetMapping("/checkNickname/{nickname}")
-    public ResponseEntity<?> checkDuplicateNickname(@RequestBody String nickname){ //중복 닉네임 검사
+    public ResponseEntity<?> checkDuplicateNickname(@PathVariable String nickname){ //중복 닉네임 검사
         Map<String, Boolean> json = new HashMap<>();
         json.put("success", userService.checkNickname(nickname));
         return new ResponseEntity<>(json, HttpStatus.OK);
@@ -85,7 +86,7 @@ public class UserController {
     @PatchMapping
     public ResponseEntity<?> modifyPassword(@RequestBody Map<String, Object> req){ //비밀번호 수정
         Map<String, Object> json = new HashMap<>();
-        json.put("success", userService.updatePassword((Long)req.get("id"), req.get("oldPassword").toString(), req.get("newPassword").toString()));
+        json.put("success", userService.updatePassword(((Integer)req.get("id")).longValue(), req.get("oldPassword").toString(), req.get("newPassword").toString()));
         return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
@@ -97,9 +98,9 @@ public class UserController {
     }
 
     @GetMapping("/findUsername") //아이디 찾기
-    public ResponseEntity<?> findUsername(@RequestBody Map<String, String> req){
+    public ResponseEntity<?> findUsername(@RequestParam(value = "name") String name, @RequestParam(value = "email") String email){
         Map<String, Object> json = new HashMap<>();
-        json.put("username", userService.findUsername(req.get("name"),req.get("email")));
+        json.put("username", userService.findUsername(name,email));
         if(json.get("username") != null){
             json.put("success", true);
         }else{

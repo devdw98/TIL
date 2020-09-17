@@ -43,7 +43,17 @@ public class User implements UserDetails {
     private String password;
 
     @Column
-    private String role;
+    private String role; //권한 관련 찾아보기
+
+    @Column
+    private String location; //지역
+
+    @Column
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private boolean anonymity; //익명여부
+
+    @Column
+    private int point; //포인트
 
 
     @ElementCollection(fetch = FetchType.EAGER)

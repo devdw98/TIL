@@ -31,10 +31,10 @@ public class UserServiceImpl implements UserService {
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .password(passwordEncoder.encode(user.getPassword()))
-//                .location(user.getLocation())
+                .location(user.getLocation())
                 .role("ROLE_USER")
-//                .anonymity(0)
-//                .point(0)
+                .anonymity(false)
+                .point(0)
                 .build();
         if(userRepository.save(result) != null)
             return true;
@@ -104,8 +104,8 @@ public class UserServiceImpl implements UserService {
         if(user.isPresent()){
             //이메일로 임시 비밀번호 전송
             String newPassword = passwordEncoder.encode(mailService.sendSimpleMessage(user.get().getEmail()));
-            Optional<User> nUser = userRepository.updateUserPassword(user.get().getId(),newPassword);
-            if(nUser.isPresent())
+            int result = userRepository.updateUserPassword(user.get().getId(),newPassword);
+            if(result == 1)
                 return true;
             else
                 return false;
