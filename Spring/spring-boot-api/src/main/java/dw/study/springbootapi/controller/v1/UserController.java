@@ -30,8 +30,9 @@ public class UserController {
 
     @ApiOperation(value = "회원 조회", notes = "회원을 조회한다")
     @GetMapping("/user/{id}")
-    public SingleResult<User> findUserById(@ApiParam(value="회원번호", required = true) @RequestParam long id){
-        return responseService.getSingleResult(userRepository.findById(id).orElse(null));
+    public SingleResult<User> findUserById(@ApiParam(value="회원번호", required = true) @RequestParam long id)
+    throws Exception{
+        return responseService.getSingleResult(userRepository.findById(id).orElseThrow(Exception::new));
     }
 
     @ApiOperation(value = "회원 입력", notes = "회원 입력한다")
