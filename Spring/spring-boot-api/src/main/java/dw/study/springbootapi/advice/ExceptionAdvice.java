@@ -1,5 +1,6 @@
 package dw.study.springbootapi.advice;
 
+import dw.study.springbootapi.advice.exception.CEmailSigninFailedException;
 import dw.study.springbootapi.advice.exception.CUserNotFoundException;
 import dw.study.springbootapi.model.response.CommonResult;
 import dw.study.springbootapi.service.ResponseService;
@@ -37,6 +38,12 @@ public class ExceptionAdvice { //특정 Exception 발생 시 공통으로 처리
     protected CommonResult userNotFoundException(HttpServletRequest req, CUserNotFoundException e){
 //        return responseService.getFailResult();
         return responseService.getFailResult(Integer.valueOf(getMessage("userNotFound.code")), getMessage("userNotFound.msg"));
+    }
+
+    @ExceptionHandler(CEmailSigninFailedException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) //로그인 관련 오류
+    protected CommonResult emailSigninFailed(HttpServletRequest request, CEmailSigninFailedException e) {
+        return responseService.getFailResult(Integer.valueOf(getMessage("emailSigninFailed.code")), getMessage("emailSigninFailed.msg"));
     }
 
     //code 정보에 해당하는 메세지 조회
