@@ -1,5 +1,6 @@
 package dw.study.springbootapi.controller.v1;
 
+import dw.study.springbootapi.advice.exception.CUserNotFoundException;
 import dw.study.springbootapi.entity.User;
 import dw.study.springbootapi.model.response.CommonResult;
 import dw.study.springbootapi.model.response.ListResult;
@@ -32,7 +33,9 @@ public class UserController {
     @GetMapping("/user/{id}")
     public SingleResult<User> findUserById(@ApiParam(value="회원번호", required = true) @RequestParam long id)
     throws Exception{
-        return responseService.getSingleResult(userRepository.findById(id).orElseThrow(Exception::new));
+//        return responseService.getSingleResult(userRepository.findById(id).orElse(null));
+//        return responseService.getSingleResult(userRepository.findById(id).orElseThrow(Exception::new));
+        return responseService.getSingleResult(userRepository.findById(id).orElseThrow(CUserNotFoundException::new));
     }
 
     @ApiOperation(value = "회원 입력", notes = "회원 입력한다")
