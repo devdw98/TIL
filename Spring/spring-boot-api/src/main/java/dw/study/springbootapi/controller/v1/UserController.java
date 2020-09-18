@@ -31,7 +31,8 @@ public class UserController {
 
     @ApiOperation(value = "회원 조회", notes = "회원을 조회한다")
     @GetMapping("/user/{id}")
-    public SingleResult<User> findUserById(@ApiParam(value="회원번호", required = true) @RequestParam long id)
+    public SingleResult<User> findUserById(@ApiParam(value="회원번호", required = true) @RequestParam long id,
+                                           @ApiParam(value="언어", defaultValue = "ko") @RequestParam String lang)
     throws Exception{
 //        return responseService.getSingleResult(userRepository.findById(id).orElse(null));
 //        return responseService.getSingleResult(userRepository.findById(id).orElseThrow(Exception::new));
