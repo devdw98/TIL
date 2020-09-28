@@ -1,8 +1,6 @@
 package dw.study.springbootapi.advice;
 
-import dw.study.springbootapi.advice.exception.CAuthenticationEntryPointException;
-import dw.study.springbootapi.advice.exception.CEmailSigninFailedException;
-import dw.study.springbootapi.advice.exception.CUserNotFoundException;
+import dw.study.springbootapi.advice.exception.*;
 import dw.study.springbootapi.model.response.CommonResult;
 import dw.study.springbootapi.service.ResponseService;
 import lombok.RequiredArgsConstructor;
@@ -56,6 +54,18 @@ public class ExceptionAdvice { //특정 Exception 발생 시 공통으로 처리
     @ExceptionHandler(AccessDeniedException.class)
     public CommonResult AccessDeniedException(HttpServletRequest request, AccessDeniedException e) {
         return responseService.getFailResult(Integer.valueOf(getMessage("accessDenied.code")), getMessage("accessDenied.msg"));
+    }
+
+    @ExceptionHandler(CCommunicationException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) //소셜로그인 오류
+    public CommonResult communicationException(HttpServletRequest request, CCommunicationException e){
+        return responseService.getFailResult(Integer.valueOf(getMessage("communicationError.code")), getMessage("communicationError.msg"));
+    }
+
+    @ExceptionHandler(CUserExistException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) //소셜로그인 오류
+    public CommonResult userExistException(HttpServletRequest request, CCommunicationException e){
+        return responseService.getFailResult(Integer.valueOf(getMessage("existingUser.code")), getMessage("existingUser.msg"));
     }
 
     //code 정보에 해당하는 메세지 조회

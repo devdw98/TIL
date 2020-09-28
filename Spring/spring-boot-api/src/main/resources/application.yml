@@ -19,6 +19,22 @@ spring:
   jwt:
     secret: dwstudy@
 
+  social:
+    kakao:
+      client_id: api code
+      redirect: /social/login/kakao
+      url:
+        login: https://kauth.kakao.com/oauth/authorize
+        token: https://kauth.kakao.com/oauth/token
+        profile: https://kapi.kakao.com/v2/user/me
+
+  url:
+    base: http://localhost:8080
+
+  freemarker:
+    template-loader-path: classpath:/templates
+    suffix: .ftl
+
 
 logging:
   level:
@@ -29,3 +45,4 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+

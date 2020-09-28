@@ -33,9 +33,12 @@ public class User implements UserDetails {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = true, length = 255) //소셜가입의 경우 암호가 필요 없음 -> nullable = true 처리
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //json 결과로 출력 안할 데이터
     private String password;
+
+    @Column(length = 100)
+    private String provider; //회원 서비스 제공자
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
