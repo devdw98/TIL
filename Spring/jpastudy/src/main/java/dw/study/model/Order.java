@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "ORDERS")
 @Setter
 @Getter
-public class Orders {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ORDER_ID")
@@ -26,6 +26,10 @@ public class Orders {
 
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orders = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "DELIVARY_ID")
+    private Delivary delivary;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
@@ -44,5 +48,10 @@ public class Orders {
     public void addOrderItem(OrderItem item){
         orders.add(item);
         item.setOrder(this);
+    }
+
+    public void setDelivary(Delivary delivary){
+        this.delivary = delivary;
+        delivary.setOrder(this);
     }
 }
