@@ -1,4 +1,4 @@
-package dw.study.jpastudy.model.entity;
+package dw.study.model.entity;
 
 public enum OrderStatus {
     ORDER, CANCEL

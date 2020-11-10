@@ -1,4 +1,4 @@
-package dw.study.jpastudy.model.entity;
+package dw.study.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
 @Setter
+@Getter
 public class Member {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEMBER_ID")
     private Long id;
 
@@ -22,6 +22,6 @@ public class Member {
     private String zipcode;
 
     @OneToMany(mappedBy = "member")
-    private List<Order> orders = new ArrayList<>();
+    private List<Orders> orders = new ArrayList<>();
 
 }

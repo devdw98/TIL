@@ -1,4 +1,4 @@
-package dw.study.jpastudy.model.entity;
+package dw.study.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,24 +6,24 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Getter
 @Setter
+@Getter
 public class OrderItem {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ORDER_ITEM_ID")
     private Long id;
 
-//    @Column(name="ORDER_ID")
+//    @Column(name = "ORDER_ID")
 //    private Long orderId;
     @ManyToOne
     @JoinColumn(name = "ORDER_ID")
-    private Order order;
+    private Orders order;
 
-//    @Column(name="ITEM_ID")
+//    @Column(name = "ITEM_ID")
 //    private Long itemId;
     @ManyToOne
-    @JoinColumn(name="ITEM_ID")
+    @JoinColumn(name = "ITEM_ID")
     private Item item;
 
     private int orderPrice;
