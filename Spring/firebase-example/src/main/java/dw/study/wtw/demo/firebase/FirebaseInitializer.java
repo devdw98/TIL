@@ -20,6 +20,7 @@ public class FirebaseInitializer {
     @Value("${firebase.accountFile}")
     private String accountFile;
 
+
 //    @PostConstruct
 //    public void initialize(){
 //        try{
