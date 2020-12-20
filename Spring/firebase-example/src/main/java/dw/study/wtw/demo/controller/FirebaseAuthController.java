@@ -16,6 +16,14 @@ import java.util.Map;
 public class FirebaseAuthController {
     private final FirebaseAuthService authService;
 
+    @GetMapping("/test")
+    public ResponseEntity<?> testUrl(){
+        Map<String, String> json = new HashMap<>();
+        json.put("success","test");
+
+        return new ResponseEntity<>(json, HttpStatus.OK);
+    }
+
     @GetMapping("/create")
     public ResponseEntity<?> createUser() throws FirebaseAuthException {
         Map<String, Boolean> json = new HashMap<>();
@@ -35,4 +43,5 @@ public class FirebaseAuthController {
         else
             return new ResponseEntity<>(json, HttpStatus.BAD_REQUEST);
     }
+
 }

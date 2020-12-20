@@ -13,12 +13,12 @@ public class FirebaseAuthServiceImpl implements FirebaseAuthService{
     public boolean create() throws FirebaseAuthException {
 //        boolean result = false;
         CreateRequest req = new CreateRequest()
-                .setEmail("dwtest0928@naver.com")
+                .setEmail("dwtest1018@naver.com")
                 .setEmailVerified(false)
                 .setPassword("secretPassword")
-                .setPhoneNumber("+12034567890")
+//                .setPhoneNumber("+20201018123")
                 .setDisplayName("John Doe")
-                .setPhotoUrl("http://www.example.com/12345678/photo.png")
+//                .setPhotoUrl("http://www.example.com/12345678/photo.png")
                 .setDisabled(false);
         UserRecord userRecord = FirebaseAuth.getInstance().createUser(req);
         if(userRecord.getUid().isEmpty())
@@ -30,9 +30,9 @@ public class FirebaseAuthServiceImpl implements FirebaseAuthService{
     public boolean delete() throws FirebaseAuthException {
 //        boolean result = false;
         CreateRequest request = new CreateRequest()
-                .setUid("dw-uid")
-                .setEmail("user1@example.com")
-                .setPhoneNumber("+11234567892");
+//                .setUid("dw-uid")
+                .setEmail("dwtest10181@naver.com");
+//                .setPhoneNumber("+11234567892");
         UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
         if(!userRecord.getUid().isEmpty()){
             FirebaseAuth.getInstance().deleteUser(userRecord.getUid());
