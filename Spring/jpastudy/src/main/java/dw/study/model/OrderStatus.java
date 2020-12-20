@@ -1,4 +1,4 @@
-package dw.study.model.entity;
+package dw.study.model;
 
 public enum OrderStatus {
     ORDER, CANCEL
