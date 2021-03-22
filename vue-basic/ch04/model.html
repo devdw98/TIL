@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <input v-model="myName" placeholder="이름" />
+      <p>나는 {{myName}} 입니다</p>
+      <textarea v-model="myText" cols="30" rows="10"></textarea>
+      <p>문장은 {{myText}}</p>
+      <p>글자 수는 {{myText.length}}자 입니다.</p>
+      <label><input type="checkbox" v-model="myCheck" /></label>
+      체크박스 상태는 {{myCheck}} 입니다.
+      <br />
+      <input type="checkbox" value="Red" v-model="myCheckArr" >적</input>
+      <input type="checkbox" value="Blue" v-model="myCheckArr" >파</input>
+      <input type="checkbox" value="Green" v-model="myCheckArr" >초</input>
+      선택한 색은 {{myCheckArr}}
+      <br/>
+      <input type="checkbox" v-model="myAgree">동의</input>
+        <button v-bind:disabled="myAgree==false">송신</button>
+        <br>
+        <input type="radio" value="apple" v-model="picked">사과</input>
+        <input type="radio" value="pear" v-model="picked">배</input>
+        <input type="radio" value="grapes" v-model="picked">포도</input>
+        선택한 과일은 {{picked}}입니다.
+        <br>
+        <select v-model="myColor">
+            <option disabled value="">색을 선택해주세요</option>
+            <option >red</option>
+            <option >orange</option>
+            <option >yellow</option>
+            <option >green</option>
+            <option >blue</option>
+            <option >purple</option>
+        </select>
+        <p v-bind:style="{color:myColor}">선택한 색상은 {{myColor}}입니다.</p>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          myName: "",
+          myText: "",
+          myCheck: false,
+          myCheckArr: [],
+          myAgree:false,
+          picked: 'apple',
+          myColor:''
+        },
+      });
+    </script>
+  </body>
+</html>
