@@ -11,7 +11,8 @@
     <h2>클릭하면 카운트가 올라갑니다.</h2>
     <div id="app">
       <p>{{count}}</p>
-      <button v-on:click="countUp">카운터</button>
+      <button v-on:click="countUp">카운터 업!</button>
+      <button v-on:click="countDown">카운터 다운!</button>
     </div>
     <script>
       new Vue({
@@ -22,6 +23,9 @@
         methods: {
           countUp: function () {
             this.count++;
+          },
+          countDown: function () {
+            this.count--;
           },
         },
       });
