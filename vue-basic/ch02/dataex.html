@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue.js sample</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>쓸 수 있는 데이터 종류</h2>
+      <p>{{myNum}}</p>
+      <p>{{myBool}}</p>
+      <p>{{myStr}}</p>
+      <p>{{myArr}}</p>
+      <p>{{myArr[1]}}</p>
+      <p>{{myObj}}</p>
+      <p>이름: {{myObj.name}}, 나이: {{myObj.age}}</p>
+      <h2>데이터 내용 확인</h2>
+      <p>{{$data}}</p>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          myNum: 123,
+          myBool: true,
+          myStr: "Hello",
+          myArr: ["a1", "a2", "a3"],
+          myObj: { name: "dw", age: 24 },
+        },
+      });
+    </script>
+  </body>
+</html>
