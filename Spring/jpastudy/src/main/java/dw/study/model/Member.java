@@ -1,4 +1,4 @@
-package dw.study.model.entity;
+package dw.study.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,16 +10,16 @@ import java.util.List;
 @Entity
 @Setter
 @Getter
-public class Member {
+public class Member extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEMBER_ID")
     private Long id;
 
     private String name;
-    private String city;
-    private String street;
-    private String zipcode;
+
+    @Embedded
+    private Address address;
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
