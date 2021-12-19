@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+        <h1>간단한 계산기</h1>
+        <input v-model="data1"></input>
+        <input v-model="data2"></input>
+        <div>
+
+            <button v-on:click="addcal(data1,data2)">덧셈</button>
+            <button v-on:click="subcal(data1,data2)">뺄셈</button>
+            <button v-on:click="mulcal(data1,data2)">곱셈</button>
+            <button v-on:click="divcal(data1,data2)">나눗셈</button>
+        </div>
+        결과는 {{result}} 입니다.
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+            data1: 0,
+            data2: 0,
+            result: 0
+        },
+        methods:{
+            addcal:function(a,b){
+                this.result = a+b;
+            },
+            subcal: function(a,b){
+                this.result= a-b;
+            },
+            mulcal:function(a,b){
+                this.result= a*b;
+            },
+            divcal:function(a,b){
+                this.result= a/b;
+            }
+        }
+      });
+    </script>
+  </body>
+</html>
